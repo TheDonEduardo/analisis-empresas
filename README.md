@@ -38,11 +38,11 @@ scripts/seguimiento.py   crear/actualizar la hoja local (1 ticker = 1 fila)
 | G | Valor Base | valoración |
 | H | Valor Pond. | valoración |
 | I | Rango (Pes - Opt) | valoración |
-| J | Margen Seg. % — **fórmula** | automática |
+| J | Margen Seg. (%) — **fórmula** | automática |
 | K | Fase Weinstein | ejecución |
 | L | Entrada / Pivote | ejecución |
 | M | Stop Invalidación | ejecución |
-| N | Dist. Stop % — **fórmula** | automática |
+| N | Dist. Stop (%) — **fórmula** | automática |
 | O | Peso Máx. (%) | ejecución |
 | P | Veredicto Operativo | ejecución |
 | Q | Catalizador / Riesgo Clave | valoración / ejecución |

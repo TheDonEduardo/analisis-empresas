@@ -25,7 +25,7 @@ El agente principal **planifica y coordina; no ejecuta el trabajo de archivos é
 
 ## Hoja de seguimiento
 
-- **Principal:** Google Sheets `Seguimiento Análisis de Acciones`, pestaña `Seguimiento` (vía conector de Google Drive).
+- **Principal:** Google Sheets `Seguimiento Análisis de Acciones` (ID `1e1tnkq22SdkMAd8t6GS4-uAjSux77Gh7XwjgFuqmVHk`), pestaña `Seguimiento`. Leer/escribir con el conector Google Sheets (`get_values`, `update_values`) por rangos concretos de la fila del ticker, nunca tocando `F`, `J` y `N`.
 - **Respaldo local versionado:** `seguimiento/Seguimiento Análisis de Acciones.xlsx`, gestionado **solo** con `scripts/seguimiento.py` (`init`, `upsert`, `show`).
 - Reglas inviolables: 1 ticker = 1 fila (columna `A`); nunca sobrescribir las fórmulas `F` (Precio Actual), `J` (Margen Seg. %) y `N` (Dist. Stop %); no borrar valores existentes de `K–P` al actualizar datos fundamentales; usar exactamente los valores de los desplegables (`D`, `E`, `K`, `P`).
 
