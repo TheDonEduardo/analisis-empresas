@@ -52,11 +52,29 @@ Reglas aplicadas: Fase 4, así que no se compra en caída libre. El ATR del 8,9 
 | Política de tramos | 50 % al activarse el escenario A; 50 % al recuperar la SMA 200 (≈ $203) con volumen o en un pullback que respete $171,5 | Prohibido promediar a la baja mientras siga en Fase 4 |
 | Gestión de salida | Stop a punto muerto a +1,5R (≈ $203, confluencia con la SMA 200/50); después, stop dinámico bajo la EMA 21 | Proteger beneficios en un activo con ATR alto |
 
-## Paso 4 — Encaje en cartera
+## Paso 4 — Encaje en cartera (actualizado con la cartera del usuario, 27-nov-2026)
 
-No hay datos de cartera en esta conversación. Antes de lanzar una orden, comprueba:
-1. **Exposición acumulada a semiconductores e IA.** El repositorio `alpha-portfolio-bot` lista una cartera con AVGO 18 %, NVDA 6 %, MSFT 10 %, GOOGL 12 % y META 7 %. Si esa es tu cartera real, ya tienes más del 50 % en la temática IA y una posición en NVDA (en ese caso, cambia el estado a `En cartera`).
-2. **Qué posición saldría** si tu cartera tiene un cupo cerrado de 10 posiciones.
+Cartera visible: 8 posiciones, ≈ 20.694 €.
+
+| Posición | Valor | Peso | P&L |
+| :--- | :--- | :--- | :--- |
+| MSFT (10) | 4.477,81 € | 21,6 % | +13,43 % |
+| META (6) | 3.345,16 € | 16,2 % | −1,74 % |
+| ORCL (30) | 2.890,22 € | 14,0 % | −20,95 % |
+| AVGO (10) | 2.764,27 € | 13,4 % | −18,10 % |
+| **NVDA (20)** | **2.754,62 €** | **13,3 %** | **−16,42 %** (coste medio ≈ $180,95) |
+| RKLB (43) | 1.892,96 € | 9,1 % | −39,07 % |
+| CRDO (15) | 1.500,98 € | 7,3 % | −7,73 % |
+| OKLO (59) | 1.067,62 € | 5,2 % | −47,74 % |
+
+- **Sobreponderación:** NVDA pesa un 13,3 %, 2,7 veces el peso máximo del plan (5 %). **No añadir capital**: ni el escenario A ni el B aplican mientras el peso supere el 5-8 %.
+- **Sobreconcentración temática:** el 85,7 % de la cartera está en infraestructura de IA (MSFT, META, ORCL, AVGO, NVDA, CRDO), y el resto en especulativas (RKLB, OKLO). Son activos muy correlacionados, como se ha visto en la caída de noviembre.
+- **Riesgo actual:** si NVDA pierde el soporte estructural de $124,50 (−17,7 % desde $151,24), el impacto en la cartera sería de ≈ −2,35 %, por encima del 0,75 % de riesgo por operación del plan.
+- **Stop de tesis frente a stop técnico:** la tesis sigue siendo sólida (margen del 21 % frente al escenario base), así que no hay motivo fundamental para vender. Las opciones de gestión del riesgo son:
+  1. Mantener las 20 acciones con un stop de salida total por cierre < $124,50.
+  2. Reducir hacia el 5-8 % (≈ 8-12 acciones) aprovechando rebotes a la resistencia $165-171,5, nunca en los mínimos.
+
+  $171,50 es solo el nivel a partir del cual volver a añadir, y únicamente si el peso lo permite.
 
 ## Paso 5 — Veredicto
 
