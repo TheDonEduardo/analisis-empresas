@@ -125,8 +125,9 @@ Al finalizar el plan operativo, busca en Google Drive la hoja de Google Sheets *
       - `O` (**Peso Máx. (%)**): porcentaje maximo sugerido (ej. `5%` o `0.05`).
       - `P` (**Veredicto Operativo**): exactamente uno de los valores del desplegable: `Ejecutable ahora`, `Lista de vigilancia` o `No operable ahora`.
       - `Q` (**Catalizador / Riesgo Clave**): sintesis en 1 linea con la fecha de proximos resultados o catalizador tecnico/fundamental clave.
-3.  **Proteccion de formulas:** **nunca sobrescribas** las columnas `F` (Precio Actual), `J` (Margen Seg. %) ni `N` (Dist. Stop %), ya que contienen formulas automaticas.
-4.  **Respaldo local en el repositorio:** registra tambien los mismos campos en `seguimiento/Seguimiento Análisis de Acciones.xlsx` delegando en `implementer` la ejecucion de `scripts/seguimiento.py upsert` (aplica la regla de fila unica, valida los desplegables y protege `F`, `J`, `N`). Si Google Drive no esta disponible en la sesion, la hoja local es el registro principal: indicalo al usuario.
+      - `R` (**Modelo / Fuente**): `Claude` (o `Consenso Claude + <otra IA>` si el usuario indica que lo ha verificado otra IA).
+3.  **Proteccion de formulas:** **nunca sobrescribas** las columnas `F` (Precio Actual), `J` (Margen Seg. %) ni `N` (Dist. Stop %), ya que contienen formulas automaticas; tampoco sobrescribas `S` (**Notas 2ª Opinión**).
+4.  **Respaldo local en el repositorio:** registra tambien los mismos campos en `seguimiento/Seguimiento Análisis de Acciones.xlsx` delegando en `implementer` la ejecucion de `scripts/seguimiento.py upsert` pasando `--modelo Claude` (aplica la regla de fila unica, valida los desplegables y protege `F`, `J`, `N`). Si Google Drive no esta disponible en la sesion, la hoja local es el registro principal: indicalo al usuario.
 
 ## Errores frecuentes a evitar
 

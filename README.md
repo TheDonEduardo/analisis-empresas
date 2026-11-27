@@ -46,6 +46,8 @@ scripts/seguimiento.py   crear/actualizar la hoja local (1 ticker = 1 fila)
 | O | Peso Máx. (%) | ejecución |
 | P | Veredicto Operativo | ejecución |
 | Q | Catalizador / Riesgo Clave | valoración / ejecución |
+| R | Modelo / Fuente (Claude, Gemini, Consenso…) | todas |
+| S | Notas 2ª Opinión | usuario / 2ª IA |
 
 La hoja principal vive en Google Sheets (`Seguimiento Análisis de Acciones`). Para crearla, importa el `.xlsx` de `seguimiento/` en Google Drive y conviértelo a Hojas de cálculo de Google: la fórmula `GOOGLEFINANCE` de la columna F empezará a funcionar.
 

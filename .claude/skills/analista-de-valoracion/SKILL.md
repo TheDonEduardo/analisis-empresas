@@ -171,11 +171,13 @@ Al finalizar el informe (salvo que el usuario haya pedido omitir el registro o e
       - `H` (**Valor Pond.**): valor numérico del Valor Esperado Ponderado si hubo modo encadenado; si no, déjalo vacío.
       - `I` (**Rango (Pes - Opt)**): rango conciso (ej. `$85 - $165`).
       - `Q` (**Catalizador / Riesgo Clave**): resumen breve en 1 línea con el dato de invalidación o riesgo principal.
+      - `R` (**Modelo / Fuente**): `Claude` (o `Consenso Claude + <otra IA>` si el análisis lo ha verificado una segunda IA y el usuario lo indica). Si la fila ya existía con otro modelo y se recalcula, sustitúyelo por `Claude`.
 4.  **Protección de fórmulas y columnas técnicas:**
     
       - **NO sobrescribas nunca** las columnas `F` (Precio Actual), `J` (Margen Seg. %) ni `N` (Dist. Stop %), ya que contienen fórmulas automáticas.
       - **NO borres** los valores ya existentes en las columnas técnicas `K–P` (Fase Weinstein, Entrada, Stop, Peso Máx., Veredicto Operativo) cuando actualices una fila existente.
-5.  **Respaldo local en el repositorio:** registra también los mismos campos en `seguimiento/Seguimiento Análisis de Acciones.xlsx` delegando en `implementer` la ejecución de `scripts/seguimiento.py upsert` (el script aplica la regla de fila única y protege `F`, `J`, `N`). Si Google Drive no está disponible en la sesión, la hoja local es el registro principal: indícalo al usuario.
+      - **NO sobrescribas** la columna `S` (**Notas 2ª Opinión**): la rellena el usuario o una segunda IA.
+5.  **Respaldo local en el repositorio:** registra también los mismos campos en `seguimiento/Seguimiento Análisis de Acciones.xlsx` delegando en `implementer` la ejecución de `scripts/seguimiento.py upsert` pasando `--modelo Claude` (el script aplica la regla de fila única y protege `F`, `J`, `N`). Si Google Drive no está disponible en la sesión, la hoja local es el registro principal: indícalo al usuario.
 
 ## Errores frecuentes a evitar
 

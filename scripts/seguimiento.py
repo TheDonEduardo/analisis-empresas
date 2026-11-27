@@ -12,7 +12,8 @@ Uso:
     # Insertar o actualizar la fila de un ticker (1 acción = 1 fila)
     python scripts/seguimiento.py upsert --ticker NASDAQ:NVDA --empresa "NVIDIA" \
         --estado Vigilancia --veredicto-tesis "Sólida y verificable" \
-        --valor-base 165 --rango "$120 - $210" --catalizador "Resultados 2026-02-25"
+        --valor-base 165 --rango "$120 - $210" --catalizador "Resultados 2026-02-25" \
+        --modelo Claude
 
     # Ver el contenido
     python scripts/seguimiento.py show
@@ -58,6 +59,8 @@ COLUMNS = [
     ("O", "Peso Máx. (%)", 13),
     ("P", "Veredicto Operativo", 20),
     ("Q", "Catalizador / Riesgo Clave", 50),
+    ("R", "Modelo / Fuente", 22),
+    ("S", "Notas 2ª Opinión", 50),
 ]
 
 LISTS = {
@@ -99,7 +102,7 @@ def init(force: bool = False) -> None:
         ws.column_dimensions[col].width = width
     ws.row_dimensions[1].height = 30
     ws.freeze_panes = "C2"
-    ws.auto_filter.ref = f"A1:Q{MAX_ROWS + 1}"
+    ws.auto_filter.ref = f"A1:S{MAX_ROWS + 1}"
 
     formula_fill = PatternFill("solid", fgColor="EDEDED")
     for r in range(2, MAX_ROWS + 2):
@@ -141,6 +144,8 @@ def init(force: bool = False) -> None:
         ("K-M, O-P", "gestor-de-ejecucion: Fase, Entrada, Stop, Peso Máx., Veredicto Operativo."),
         ("N Dist. Stop (%)", "FÓRMULA (L-M)/L. No sobrescribir."),
         ("Q", "Catalizador o riesgo clave en una línea."),
+        ("R Modelo / Fuente", "IA que hizo el análisis (Claude, Gemini…) o 'Consenso X + Y' si lo verificaron 2 IA."),
+        ("S Notas 2ª Opinión", "Notas de la segunda IA o del usuario. Las skills no lo sobrescriben."),
     ]
     for i, (a, b) in enumerate(legend, start=2):
         lg[f"A{i}"], lg[f"B{i}"] = a, b
@@ -155,6 +160,7 @@ FIELD_TO_COL = {
     "empresa": "B", "estado": "D", "veredicto_tesis": "E", "valor_base": "G",
     "valor_pond": "H", "rango": "I", "fase": "K", "entrada": "L", "stop": "M",
     "peso_max": "O", "veredicto_operativo": "P", "catalizador": "Q",
+    "modelo": "R", "notas": "S",
 }
 NUMERIC = {"G", "H", "L", "M"}
 
@@ -167,11 +173,26 @@ def _peso(value: str) -> float:
     return f / 100 if f > 1 else f
 
 
+def ensure_headers(ws) -> None:
+    """Escribe en la fila 1 las cabeceras de COLUMNS que falten, sin tocar datos."""
+    head_fill = PatternFill("solid", fgColor="1F3864")
+    for col, name, width in COLUMNS:
+        c = ws[f"{col}1"]
+        if c.value in (None, ""):
+            c.value = name
+            c.font = Font(bold=True, color="FFFFFF")
+            c.fill = head_fill
+            c.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+            ws.column_dimensions[col].width = width
+    ws.auto_filter.ref = f"A1:{COLUMNS[-1][0]}{MAX_ROWS + 1}"
+
+
 def upsert(args: argparse.Namespace) -> None:
     if not XLSX.exists():
         init()
     wb = load_workbook(XLSX)
     ws = wb[SHEET]
+    ensure_headers(ws)
     ticker = args.ticker.strip().upper()
 
     target, first_empty = None, None
